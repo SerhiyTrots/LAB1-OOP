@@ -110,6 +110,15 @@ double method8(double a, double b)
 	} while (x*x >= (-4)*(log(b1) / log(M_E)));
 	return x;
 }
+double method9(double a)
+{
+	unsigned int m = 2147483647;
+	a = method1(a);
+	int fi = 31;
+	double a1 = a / double(m);
+	double x = (-fi)*(log(a1) / log(M_E));
+	return x;
+}
 
 void gist()
 {
@@ -214,6 +223,17 @@ void gist()
 			{
 				arrS[i] = arr[i];
 			}
+			break;
+		}
+		case 9:
+		{
+			arr[i] = method9(x);
+			x = method1(x);
+			for (int i = 0; i < n; i++)
+			{
+				arrS[i] = arr[i];
+			}
+			break;
 		}
 
 		}
@@ -228,11 +248,17 @@ void gist()
 		step = 0.1;
 		final = 0.9;
 	}
-	else
+	if (number == 6 || number == 7 || number == 8)
 	{
 		begin = -3.0;
 		step = 0.5;
 		final = 3.0;
+	}
+	if (number == 9 || number == 10)
+	{
+		begin = 0.0;
+		step = 10.0;
+		final = 100.0;
 	}
 	for (double intr = begin; intr < final; intr += step)
 	{
@@ -254,4 +280,3 @@ int main()
 	system("pause");
 	return 0;
 }
-
