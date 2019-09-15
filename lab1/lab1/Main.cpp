@@ -54,7 +54,6 @@ double method4(int x)
 	return x;
 }
 
-
 double method5(double a, double b)
 {
 	unsigned int m = 2147483647;
@@ -75,6 +74,7 @@ double method6(unsigned int x1)
 
 	return sum - 6;
 }
+
 double  method7(double a, double b, double * arr)
 {
 	unsigned int m = 2147483647;
@@ -110,6 +110,7 @@ double method8(double a, double b)
 	} while (x*x >= (-4)*(log(b1) / log(M_E)));
 	return x;
 }
+
 double method9(double a)
 {
 	unsigned int m = 2147483647;
@@ -119,6 +120,25 @@ double method9(double a)
 	double x = (-fi)*(log(a1) / log(M_E));
 	return x;
 }
+
+double method10(double a, double b)
+{
+	unsigned int m = 2147483647;
+	double a1, b1, x, y;
+	int k = 23;
+	do
+	{
+		a = method1(a);
+		b = method2(b);
+		a1 = a / double(m);
+		b1 = b / double(m);
+		y = tan(M_PI*a1);
+		x = sqrt(2 * k - 1)*y + k - 1;
+	} while (x <= 0 || b1 > (1 + y)*exp((k - 1)*(log(x / (k - 1)) / log(M_E) - sqrt(2 * k - 1)*y)));
+
+	return x;
+}
+
 
 void gist()
 {
@@ -235,6 +255,14 @@ void gist()
 			}
 			break;
 		}
+		case 10:
+			arr[i] = method10(x, y);
+			x = method1(x);
+			y = method2(y);
+			for (int i = 0; i < n; i++)
+			{
+				arrS[i] = arr[i];
+			}
 
 		}
 	}
