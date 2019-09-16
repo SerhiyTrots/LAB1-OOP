@@ -7,8 +7,8 @@ using namespace std;
 double method1(int x)
 {
 	unsigned int m = 2147483647;
-	int c = 5555555;
-	int a = 3333335;
+	int c = 23;
+	int a = 37;
 	x = (a*x + c) % m;
 	return x;
 }
@@ -16,66 +16,63 @@ double method1(int x)
 double method2(int x)
 {
 	unsigned int m = 2147483647;
-	int c = 5;
-	int a = 3;
-	int d = 4;
+	int c = 57;
+	int a = 37;
+	int d = 733;
 	x = (d*x*x + a * x + c) % m;
 	return x;
 }
 
-double method3(int x, int x1, int x0)
+double method3(int x1, int x0)
 {
-	unsigned int m = 2147483647;
-	x = (x1 + x0) % m;
+	unsigned int m = 2000001;
+	int x = (x1 + x0) % m;
 	x0 = x1;
 	x1 = x;
 	return x;
 }
 
-double findReversal(double x)
+double findReversal(int x)
 {
-	int p = 332423;
+	int p = 10141;
 	for (int i = 1; i < p; i++)
 	{
-		if ((int(x)*i) % p == 1)
+		if ((x*i) % p == 1)
 			return i;
 	}
-
 }
 
 double method4(int x)
 {
-	int p = 12421;
+	int p = 10141;
 	int a = 234;
-	int c = 1234;
-	unsigned int m = 2147483647;
-	double xr = findReversal(x);
-	x = int((a*xr + c)) % p;
+	int c = 1237;
+	int xr = findReversal(x);
+	x = (a*xr + c) % p;
 	return x;
 }
 
-double method5(double a, double b)
+double method5(int a, int b)
 {
+	a = method1(a);
+	b = method2(b);
 	unsigned int m = 2147483647;
-	return int((a - b)) % m;
+	return (a - b) % m;
 }
 
-double method6(unsigned int x1)
+double method6(int x1)
 {
 	unsigned int m = 2147483647;
-	unsigned int arr[12];
-	arr[0] = x1;
 	double sum = 0;
-	for (int i = 1; i < 12; i++)
+	for (int i = 1; i <= 12; i++)
 	{
-		arr[i] = method1(arr[i - 1]);
-		sum += double(arr[i]) / double(m);
+		x1 = method1(x1);
+		sum += double(x1) / double(m);
 	}
-
 	return sum - 6;
 }
 
-double  method7(double a, double b, double * arr)
+double  method7(int a, int b, double * arr)
 {
 	unsigned int m = 2147483647;
 	double a1, b1, v1, v2, s;
@@ -96,7 +93,7 @@ double  method7(double a, double b, double * arr)
 	return  arr[2];
 }
 
-double method8(double a, double b)
+double method8(int a, int b)
 {
 	unsigned int m = 2147483647;
 	double a1, b1, x;
@@ -111,7 +108,7 @@ double method8(double a, double b)
 	return x;
 }
 
-double method9(double a)
+double method9(int a)
 {
 	unsigned int m = 2147483647;
 	a = method1(a);
@@ -121,11 +118,11 @@ double method9(double a)
 	return x;
 }
 
-double method10(double a, double b)
+double method10(int a, int b)
 {
 	unsigned int m = 2147483647;
 	double a1, b1, x, y;
-	int k = 23;
+	int k = 38;
 	do
 	{
 		a = method1(a);
@@ -134,8 +131,7 @@ double method10(double a, double b)
 		b1 = b / double(m);
 		y = tan(M_PI*a1);
 		x = sqrt(2 * k - 1)*y + k - 1;
-	} while (x <= 0 || b1 > (1 + y)*exp((k - 1)*(log(x / (k - 1)) / log(M_E) - sqrt(2 * k - 1)*y)));
-
+	} while (x <= 0 || b1 > (1 + y * y)*exp((k - 1)*(log(x / (k - 1)) - sqrt(2 * k - 1)*y)));
 	return x;
 }
 
@@ -146,130 +142,118 @@ void gist()
 	double arr[n];
 	srand(time(NULL));
 	arr[0] = rand();
-	double arrS[n];
 	int number;
 	cin >> number;
 	srand(time(NULL));
 	int x = rand();
 	srand(time(NULL));
 	int y = rand();
-	for (int i = 1; i < n; i++)
+	switch (number)
 	{
-		switch (number)
-		{
-		case 1:
+	case 1:
+	{
+		for (int i = 1; i < n; i++)
 		{
 			unsigned int m = 2147483647;
 			arr[i] = method1(arr[i - 1]);
-			for (int i = 0; i < n; i++)
-			{
-				arrS[i] = arr[i] / double(m);
-			}
-			break;
+			arr[i - 1] = arr[i - 1] / double(m);
 		}
-		case 2:
+		break;
+	}
+	case 2:
+	{
+		for (int i = 1; i < n; i++)
 		{
 			unsigned int m = 2147483647;
 			arr[i] = method2(arr[i - 1]);
-			for (int i = 0; i < n; i++)
-			{
-				arrS[i] = arr[i] / double(m);
-			}
-			break;
+			arr[i - 1] = arr[i - 1] / double(m);
 		}
-		case 3:
+		break;
+	}
+	case 3:
+	{
+		for (int i = 2; i < n; i++)
 		{
-			unsigned int m = 2147483647;
-			arr[i] = method3(arr[i - 1], arr[i - 2], arr[i - 3]);
-			for (int i = 0; i < n; i++)
-			{
-				arrS[i] = arr[i] / double(m);
-			}
-			break;
+			unsigned int m = 2000001;
+			srand(time(NULL));
+			arr[1] = rand();
+			arr[i] = method3(arr[i - 1], arr[i - 2]);
+			arr[i - 2] = arr[i - 2] / double(m);
 		}
-		case 4:
+		break;
+	}
+	case 4:
+	{
+		for (int i = 1; i < n; i++)
 		{
-			unsigned int m = 2147483647;
+			unsigned int p = 10141;
 			arr[i] = method4(arr[i - 1]);
-			for (int i = 0; i < n; i++)
-			{
-				arrS[i] = arr[i] / double(m);
-			}
-
+			arr[i - 1] = arr[i - 1] / double(p);
 		}
-		case 5:
+		break;
+	}
+	case 5:
+	{
+		for (int i = 1; i < n; i++)
 		{
 			unsigned int m = 2147483647;
 			arr[i] = method5(method1(arr[i - 1]), method2(arr[i - 1]));
-			for (int i = 0; i < n; i++)
-			{
-				arrS[i] = arr[i] / double(m);
-			}
-			break;
+			arr[i - 1] = arr[i - 1] / double(m);
 		}
-		case 6:
+		break;
+	}
+	case 6:
+	{
+		for (int i = 1; i < n; i++)
 		{
-
 			arr[i] = method6(x);
 			x = method1(x);
-			//cout << arr[i] << endl;
-			for (int i = 0; i < n; i++)
-			{
-				arrS[i] = arr[i];
-			}
-
-			break;
 		}
-		case 7:
-		{	double arr1[2];
-		method7(x, y, arr1);
-		arr[i - 1] = arr1[0];
-		arr[i] = arr1[1];
-		x = method1(x);
-		y = method2(y);
-		for (int i = 0; i < n; i++)
+		break;
+	}
+	case 7:
+	{
+		for (int i = 1; i < n; i++)
 		{
-			arrS[i] = arr[i];
+			double arr1[2];
+			method7(x, y, arr1);
+			arr[i - 1] = arr1[0];
+			arr[i] = arr1[1];
+			x = method1(x);
+			y = method2(y);
 		}
-
-		}
-		case 8:
+		break;
+	}
+	case 8:
+	{
+		for (int i = 1; i < n; i++)
 		{
-
 			arr[i] = method8(x, y);
 			x = method1(x);
 			y = method2(y);
-			for (int i = 0; i < n; i++)
-			{
-				arrS[i] = arr[i];
-			}
-			break;
 		}
-		case 9:
+		break;
+	}
+	case 9:
+	{
+		for (int i = 1; i < n; i++)
 		{
 			arr[i] = method9(x);
 			x = method1(x);
-			for (int i = 0; i < n; i++)
-			{
-				arrS[i] = arr[i];
-			}
-			break;
 		}
-		case 10:
+		break;
+	}
+	case 10:
+		for (int i = 1; i < n; i++)
+		{
 			arr[i] = method10(x, y);
 			x = method1(x);
 			y = method2(y);
-			for (int i = 0; i < n; i++)
-			{
-				arrS[i] = arr[i];
-			}
-
 		}
+		break;
 	}
 	int count = 0;
-	double begin;
-	double step;
-	double final;
+	double begin, step, final;
 	if (number == 1 || number == 2 || number == 3 || number == 4 || number == 5)
 	{
 		begin = 0.0;
@@ -285,15 +269,14 @@ void gist()
 	if (number == 9 || number == 10)
 	{
 		begin = 0.0;
-		step = 10.0;
+		step = 5.0;
 		final = 100.0;
 	}
 	for (double intr = begin; intr < final; intr += step)
 	{
 		for (int i = 0; i < n; i++)
 		{
-
-			if ((arrS[i] <= intr + step) && (arrS[i] >= intr))
+			if ((arr[i] <= intr + step) && (arr[i] >= intr))
 				count++;
 		}
 		cout << "[" << intr << " ; " << intr + step << "]" << "  " << count << endl;
